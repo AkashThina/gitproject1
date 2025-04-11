@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 50px;">
+  <div class="card p-4 shadow-lg rounded bg-light" style="width: 450px;">
+    
+    <button class="btn-close position-absolute" style="top: 10px; right: 15px;" (click)="goBack()"></button>
+    
+    <div class="d-flex justify-content-center mb-3">
+      <i class="bi bi-person-circle text-primary" style="font-size: 4rem;"></i>
+    </div>  
+
+    <form #loginForm="ngForm" (ngSubmit)="onSubmitLogin()">
+      <h3 class="text-center mb-3">Login</h3>
+
+      <div class="form-floating my-2">
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email"
+         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$" required  #email="ngModel" placeholder="Email">
+        <label for="email">Email address</label>
+      </div>
+      <div *ngIf="email.touched" class="text-danger small">
+       <div *ngIf = "email.errors?.['required']">Please Enter Your Email</div>
+       <div *ngIf = "email.errors?.['pattern']">Please enter a valid email (e.g : sample123&#64;gmail.com)</div>
+       <div *ngIf="errorMessage === 'User not found'">User not found</div>
+      </div>
+     
+
+      <div class="form-floating my-2">
+        <input [type]="showPassword ? 'text' : 'password'"  class="form-control" id="password" name="password"
+          pattern="^(?=.*[A-Z])(?=.*[\W])(?=.*\d?).{6,}$"  [(ngModel)]="user.password" required minlength="6" #password="ngModel" placeholder="Password">
+        <label for="password">Password</label>
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePassword()" 
+        style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;">
+     </i>
+      </div>
+      <div *ngIf="password.touched" class="text-danger small">
+        <div *ngIf="password.errors?.['required']">Password is required *</div>
+        <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters.</div>
+        <div *ngIf="errorMessage === 'Invalid password'">Invalid password</div>
+        <div *ngIf="password.errors?.['pattern']">Password must contain at least one uppercase letter and one special symbol.</div>
+      </div>
+     
+      <button [disabled]="loginForm.invalid" (click)="cartService.showNav()" class="btn btn-primary w-100 mt-2" type="submit" style="border-radius: 30px;" >Login</button>
+
+      <p class="text-center mt-3">
+        Don't have an account? 
+        <a routerLink="/signup">Sign Up</a>
+      </p>
+    </form>  
+  </div> 
+</div>

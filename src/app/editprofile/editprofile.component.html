@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 50px;">
+    <div class="card p-4 shadow-lg rounded bg-light" style="width: 450px;">
+      
+      <div class="d-flex justify-content-center mb-3">
+        <i class="bi bi-person-circle text-primary" style="font-size: 4rem;"></i>
+      </div>
+
+      <!-- Edit Form -->
+      <form [formGroup]="editProfile" (ngSubmit)="onUpdateProfile()">
+        <h3 class="text-center mb-3">Edit Profile</h3>
+
+        <!-- Name Input -->
+        <div class="form-floating my-2">
+            <input type="text" class="form-control" id="name" formControlName="name" required placeholder="Full Name">
+            <label for="name">Full Name</label>
+        </div>
+        <div *ngIf="editProfile.get('name')?.invalid && editProfile.get('name')?.touched" class="text-danger small">
+            <div *ngIf="editProfile.get('name')?.errors?.['required']">Full Name is required.</div>
+            <div *ngIf="editProfile.get('name')?.errors?.['minlength']">Name must be at least 3 characters.</div>
+            <div *ngIf="editProfile.get('name')?.errors?.['pattern']">Name should not contain numbers.</div>
+        </div>
+
+        <!-- Email Input -->
+        <div class="form-floating my-2">
+            <input type="email" class="form-control" id="email" formControlName="email" required placeholder="Email">
+            <label for="email">Email address</label>
+        </div>
+        <div *ngIf="editProfile.get('email')?.invalid && editProfile.get('email')?.touched" class="text-danger small">
+            <div *ngIf="editProfile.get('email')?.errors?.['required']">Email is required.</div>
+            <div *ngIf="editProfile.get('email')?.errors?.['pattern']">Enter a valid email (e.g : sample123&#64;gmail.com).</div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-floating my-2 position-relative">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" formControlName="password" required placeholder="New Password">
+            <label for="password">New Password</label>
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePassword()" 
+               style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;">
+            </i>
+        </div>
+        <div *ngIf="editProfile.get('password')?.invalid && editProfile.get('password')?.touched" class="text-danger small">
+            <div *ngIf="editProfile.get('password')?.errors?.['minlength']">Must be at least 6 characters.</div>
+            <div *ngIf="editProfile.get('password')?.errors?.['pattern']">Must contain an uppercase letter and a special symbol.</div>
+        </div>
+
+        <!-- Save Button -->
+        <button [disabled]="editProfile.invalid" class="btn btn-primary w-100 mt-2" type="submit" style="border-radius: 30px;">Save Changes</button>
+
+        <p class="text-center mt-2">
+            Want to go back? 
+            <a routerLink="">Home</a>
+        </p>
+      </form>
+    </div>
+</div>

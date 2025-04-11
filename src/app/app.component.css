@@ -1,0 +1,76 @@
+div { margin-bottom: 10px; }
+input { margin-right: 5px; }
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .product-list {
+    margin-left: 270px; 
+    padding: 20px;
+  }
+  .sidebar {
+    width: 200px;
+    min-height: 100vh;
+    position: fixed;
+  }
+  
+  .icon-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  *, ::after, ::before {
+    box-sizing:content-box;
+}
+#span1{
+  background-color: orange;
+  color: black;
+  border-radius: 48%;
+}
+#input1{
+  border-radius: 50px;
+}
+button{
+  border-radius: 50px;
+}
+#div1{
+  background-color: #ebbdeb;
+}
+#div2{
+  background-color: #ebbdeb;
+  width: 180px;
+}
+
+li :hover{
+  cursor: pointer;
+}
+#div3{
+  margin-left: 320px;
+}
+.login-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+  
+}
+body {
+  overflow: auto;
+  opacity: 0.1;
+}
+  

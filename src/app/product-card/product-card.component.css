@@ -1,0 +1,33 @@
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+  }
+  .out-of-stock {
+    background-color: #f8d7da;
+  }
+  #div3{
+    margin-left: 200px;
+    width: 400px;
+  }
+  #button1{
+    width: 50px;
+    text-align: center;
+    margin-left: 354px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+
+  }
+  .equal-height {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  
+  .equal-height .card-body {
+    flex-grow: 1;
+  }
+  
+  
+  

@@ -1,0 +1,60 @@
+<div class="ms-3 mt-2">
+  <div class="row" style="width: 87%;">
+    <div class="col-md-2">
+      <nav id="div2" class="shadow-lg vh-100 p-3 ms-3" style="position:fixed;">
+        <h4>Categories</h4>
+        <div class="dropdown">
+          <button class="btn btn-warning dropdown-toggle w-75 mb-2" [class.disabled]="isSidebarDisabled" type="button" data-bs-toggle="dropdown">
+            Filter <i class="bi bi-funnel"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li class="w-75"><a class="dropdown-item" (click)="showAllProducts()">All</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="filterByCategory('Men\'s Clothing')">Men's Clothing</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="filterByCategory('Electronics')">Electronics</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="filterByCategory('Women\'s Clothing')">Women's Clothing</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="filterByCategory('jewelery')">Jewellery</a></li>
+          </ul>
+        </div>
+        <h4>Sort</h4>
+        <div class="dropdown">
+          <button class="btn btn-warning dropdown-toggle w-75 mb-2" [class.disabled]="isSidebarDisabled" type="button" data-bs-toggle="dropdown">
+            Sort ↑↓  
+          </button>
+          <ul class="dropdown-menu">
+            <li class="w-75"><a class="dropdown-item" (click)="sortByName('asc')">Sort : A-Z</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="sortByName('desc')">Sort : Z-A</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="sortByPrice('asc')">Price: Low to High</a></li>
+            <li class="w-75"><a class="dropdown-item" (click)="sortByPrice('desc')">Price: High to Low</a></li>
+          </ul>
+        </div>
+        <h4 class="mt-3">Rating <i class="bi bi-star-fill text-warning"  (click)="showAllProducts()" style="cursor: pointer;"></i></h4>
+        <div *ngIf="RatingHide">
+          <i class="bi bi-star-fill me-2" *ngFor="let star of [1,2,3,4,5]"   [ngClass]="{'text-warning': star <= selectedRating, 'text-secondary': star >= selectedRating}"
+            (click)="setRating(star)"
+            style="cursor: pointer;"></i>
+        </div>
+      </nav>
+    </div>
+    <div class="col-md-10" id="div3" *ngIf="!selectedProduct">
+      <div class="row gap-4">
+        <div class="card col-md-3 shadow-lg" *ngFor="let x of filteredProducts" style="height: 350px; ">
+          <img [src]="x.image" alt="{{ x.title }}" class="mx-5 mt-3" height="160px" width="150px">
+          <div class="card-body">
+            <h5 class="card-title"><b>Name :</b> {{ x.title.slice(0, 20) }} ...</h5>
+            <p><b>Price :</b>$  {{x.price}} </p>
+            <button class="btn btn-warning" (click)="showDetails(x)">More Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="selectedProduct">
+  <app-product-card 
+    [product]="selectedProduct" 
+    (backClicked)="hideDetails()" 
+    (addToCartEvent)="addToCart($event)" 
+    [productQuantity]="productQuantity">
+  </app-product-card>
+</div>
+

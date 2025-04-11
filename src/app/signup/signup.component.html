@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 50px;">
+  <div class="card p-4 shadow-lg rounded bg-light" style="width: 450px;">
+    
+    <div class="d-flex justify-content-center mb-3">
+      <i class="bi bi-person-circle text-success" style="font-size: 4rem;"></i>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignUp()">
+      <h3 class="text-center mb-3">Sign Up</h3>
+
+     
+      <div class="form-floating my-2">
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Full Name">
+        <label for="name">Full name</label>
+      </div>
+      <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-danger small">
+        <div *ngIf="signupForm.get('name')?.errors?.['required']">Full Name is required *</div>
+        <div *ngIf="signupForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</div>
+        <div *ngIf="signupForm.get('name')?.errors?.['maxlength']">Name must be at most 30 characters</div>
+        <div *ngIf="signupForm.get('name')?.errors?.['pattern']">Don't use numbers in name</div>
+      </div>
+
+      <div class="form-floating my-2">
+        <input type="email" class="form-control" id="signupEmail" formControlName="email" placeholder="Email">
+        <label for="signupEmail">Email address</label>
+      </div>
+      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger small">
+        <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required *</div>
+        <div *ngIf="signupForm.get('email')?.errors?.['pattern']">Enter a valid email address (e.g : sample123&#64;gmail.com)</div>
+      </div>
+
+    
+      <div class="form-floating my-2 position-relative">
+        <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="signupPassword" formControlName="password" placeholder="Password">
+        <label for="signupPassword">Password</label>
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePassword()" 
+           style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;">
+        </i>
+      </div>
+      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger small">
+        <div *ngIf="signupForm.get('password')?.errors?.['required']">Password is required *</div>
+        <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</div>
+        <div *ngIf="signupForm.get('password')?.errors?.['pattern']">Password must contain at least one uppercase letter and one special symbol. A number is optional.</div>
+      </div>
+
+      <button [disabled]="signupForm.invalid" class="btn btn-success w-100 mt-2" type="submit" style="border-radius: 30px;">Sign Up</button>
+
+      <p class="text-center mt-2">
+        Already have an account? 
+        <a routerLink="/login">Login</a>
+      </p>
+    </form>
+  </div>  
+</div>

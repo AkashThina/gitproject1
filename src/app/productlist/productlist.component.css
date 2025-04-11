@@ -1,0 +1,65 @@
+div { margin-bottom: 10px; }
+input { margin-right: 5px; }
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #f8f9fa;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Product List Styling */
+  .product-list {
+    margin-left: 270px; /* Adjust to match sidebar width */
+    padding: 20px;
+  }
+  .sidebar {
+    width: 200px;
+    min-height: 100vh;
+    position: fixed;
+  }
+  
+  .icon-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  *, ::after, ::before {
+    box-sizing:content-box;
+}
+#span1{
+  background-color: orange;
+  color: black;
+  border-radius: 48%;
+}
+#input1{
+  border-radius: 50px;
+}
+button{
+  border-radius: 50px;
+}
+#div1{
+  background-color: #ebbdeb;
+  
+
+}
+#div2{
+  background-color: #ebbdeb;
+  width: 180px;
+}
+#div4{
+  margin-left: 30px;
+}
+li :hover{
+  cursor: pointer;
+}
+#div3{
+  margin-left: 350px;
+  
+}

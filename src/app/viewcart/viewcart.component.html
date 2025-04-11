@@ -1,0 +1,45 @@
+<div class="ms-5 mt-3 d-flex">
+  <div class="col-md-8">
+    <h3>Shopping Cart</h3>
+    <div *ngIf="cartItems && cartItems.length === 0">Your cart is empty.</div>
+    <div *ngFor="let item of cartItems" class="card p-2 mt-2" style="background-color: #fcecfc;" >
+      <button class="btn-close" id="btn1" (click)="removeFromCart(item?.id)"></button>
+     
+      <div class="d-flex">
+        <img [src]="item?.image" alt="{{ item?.title }}" width="180px" height="250px">
+        <br>
+        <div><p class="hori"></p></div>
+        <div class="ms-3">
+          <p><b>{{ item?.title || 'No Title' }}</b></p>
+        <p style="text-align: justify;" class="me-2"><b>Description : </b> {{ item?.description }}</p>
+        <p><b>Price:</b> $ {{ item.price * (item.quantity ?? 1) }}</p>
+        <p><b>Stock:</b> 
+          <span [ngClass]="{
+            'text-danger': (item.rating?.count ?? 0) === 0,
+            'text-success': (item.rating?.count ?? 0) > 0
+          }">
+            {{ (item.rating?.count ?? 0) > 0 ? (item.rating?.count ?? 0) : 'Out of Stock' }}
+          </span>
+        </p>
+        <p><b>Rating:</b> ⭐ {{ item.rating?.rate ?? 'N/A' }} 
+        </div>
+      </div>
+     
+  
+      <div class="align-items-center  mb-3  ms-5">
+        <button class="btn btn-danger" style="border-radius: 50%; width: 36px;" (click)="decreaseQuantity(item)">-</button>
+        <span class="mx-3"><b>{{ item.quantity ?? 1 }}</b></span>
+        <button class="btn btn-success" style="border-radius: 50%;"  (click)="increaseQuantity(item)">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 ms-3 " style="margin-top: 42px;">
+    <div class="card p-3 position-fixed w-25" style="background-color: #fcecfc;">
+      <p></p>
+      <p>Total Items: {{ totalItems }}</p>
+      <h4>Total Amount : ${{ totalPrice.toFixed(2) }}</h4>
+      <button class="btn btn-warning my-1" (click)="login()"  style="width: 100px;">Buy Now</button>
+       <br>
+      <p>Emi Available </p>
+  </div>
+</div>

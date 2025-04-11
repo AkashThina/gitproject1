@@ -1,0 +1,78 @@
+<!-- <h1>Hello, {{ title}}</h1> -->
+ <!-- <marquee  direction="rtl" onmouseover="this.stop();" onmouseout="this.start();" >I Am a Sample message </p></marquee> -->
+<div id="div1"  *ngIf="endURL !== '/login'"  class="sticky-top" style="width: 1350px;">
+  
+  <!-- Nav Bar -->
+    <nav  class="navbar navbar-expand navbar-light shadow"  style="height: 50px;width: 1350px; ">
+      <div class="container-fluid my-2 d-flex justify-content-between align-items-center">
+        <div class="navbar-brand d-flex ms-4">
+          <img src="assests/logo34.jpg" alt="MyShop Logo" class="me-2" style="margin-top: 19px;" height="40px"><p class="fs-4 mt-4"><b >My Shop</b></p>
+        </div>
+  
+        <div class="input-group  my-2">
+          <input class="form-control ms-5" id="input1"  name="search" type="search"
+            placeholder="Search products..." aria-label="Search"> 
+          <span id="span1" class="input-group-text"><i class="bi bi-search"></i></span>
+        </div>
+        
+        <div class="container">
+          <div class="collapse navbar-collapse justify-content-center" style="margin-top: 20px" id="navbarNav">
+              <ul class="navbar-nav d-flex flex-row align-items-center">
+                  <li class="nav-item fs-5 me-3"><a class="nav-link active" routerLink=""><b><i class="bi bi-house-fill"></i> Home</b></a></li>
+                  <!-- <li class="nav-item fs-5 me-3"><a class="nav-link" routerLink="viewcart"><b><i class="bi bi-cart4"></i> Cart</b></a></li> -->
+                  <!-- <li class="nav-item fs-5 me-3"><a class="nav-link"><b><i class="bi bi-telephone-fill"></i> Contact</b></a></li> -->
+                  <li> <button *ngIf="!cartService.isLoggedIn()"  class="btn btn-primary"  routerLink="/login">
+                    Login
+                  </button>
+                  <button *ngIf="cartService.isLoggedIn()"  class="btn btn-danger d-flex align-items-center justify-content-center" (click)="logout()"> 
+                    Logout <i class="bi bi-power ms-2"></i>
+                  </button>
+                </li>
+                <li class="ms-4"><span>
+                  <i class="bi bi-cart4 fs-4  text-primary " routerLink="viewcart" style="cursor: pointer;"></i>
+                  <span *ngIf="cartService.cartItemCount() > 0" class="position-absolute translate-middle badge rounded-pill bg-danger">
+                    {{ cartService.cartItemCount() }}
+                  </span>
+                </span></li>
+              </ul> 
+          </div>
+          </div>
+         
+
+         <!-- Profile -->
+        <div *ngIf="cartService.isLoggedIn()" class="my-2">
+          <button class="btn btn-primary  my-1"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> {{ cartService.getCurrentUser().charAt(0).toUpperCase() }}</button> 
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+              <h5 id="offcanvasRightLabel" class="mx-auto">
+                Welcome, {{ cartService. getCurrentUser() | capitalizeFirst }}</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>  
+
+            <div class="offcanvas-body">
+              <div class="d-flex justify-content-center align-items-center text-center fs-1 bg-warning mx-auto" 
+                    style="border-radius: 50%; width: 100px; height: 100px;">
+                    <i class="bi bi-person-fill"></i>
+            </div>
+              <div>
+                <div class="text-center justify-content-center align-items-center d-flex text-primary"> {{ cartService.getCurrentEmail() }} </div>
+                <div class="text-center justify-content-center align-items-center d-flex"> Edit Your Profile 
+                  <i class="ms-2 bi bi-pencil-fill" style="cursor: pointer;" routerLink="edit"></i>
+                </div>
+              </div> 
+              <hr>
+              <div>
+                <i class="bi bi-person-fill me-2"></i> My Profile
+              </div>
+              <div >
+                <p class="text-danger" (click)=" deleteAccount()" style="cursor: pointer;"><i class="bi bi-trash3 me-2"></i>Delete Account</p>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+</div>
+
+<router-outlet></router-outlet>  
